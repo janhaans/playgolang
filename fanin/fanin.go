@@ -5,17 +5,17 @@ import (
 )
 
 func main() {
-	for text := range fanin(gen("Jan"), gen("AM")) {
+	for text := range fanin(gen("Jan", 5), gen("AM", 10)) {
 		fmt.Println(text)
 	}
 	fmt.Println("I do not hear anything, I stop listening")
 }
 
-func gen(message string) chan string {
+func gen(message string, number int) chan string {
 	output := make(chan string)
 	//Send message 10x to output channel, then close output channel
 	go func() {
-		for i := 0; i < 10; i++ {
+		for i := 0; i < number; i++ {
 			output <- message
 		}
 		close(output)
