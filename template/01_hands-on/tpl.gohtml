@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+{{range .}}
+
+<!-- PUT YOUR CODE HERE TO SHOW THE DATA-->
+    <p>Semester {{.Fall.Term}} in year {{.AcaYear}} the courese are: </p>
+    <ul>
+        {{range .Fall.Courses}}
+        <li>Number: {{.Number}} ;Name: {{.Name}} ;Units {{.Units}}
+        {{end}}
+    </ul>
+    <br>
+    <p>Semester {{.Spring.Term}} in year {{.AcaYear}} the courese are: </p>
+    <ul>
+        {{range .Spring.Courses}}
+        <li>Number: {{.Number}} ;Name: {{.Name}} ;Units {{.Units}}
+        {{end}}
+    </ul>
+    <hr>
+{{end}}
+
+</body>
+</html>
