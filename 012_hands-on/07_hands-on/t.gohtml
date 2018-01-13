@@ -1,0 +1,9 @@
+{{range .}}
+Menu of restaurant: {{.Name}}
+    {{range .Menu.Meals}}
+    {{.Type}}
+        {{range .Items}}
+            - {{.Title}}: {{.Description}} = {{.Price}} Euro
+        {{end}}
+    {{end}}
+{{end}}
