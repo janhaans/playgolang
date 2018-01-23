@@ -12,28 +12,37 @@ func init() {
 	t = template.Must(template.ParseGlob("template/*"))
 }
 
+type Person struct {
+	Fname string
+	Bname string
+	Age   int32
+}
+
+var person Person
+
 func index(w http.ResponseWriter, req *http.Request) {
-	err := t.ExecuteTemplate(w, "index.html", "")
+	err := t.ExecuteTemplate(w, "index.html", person)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func dog(w http.ResponseWriter, req *http.Request) {
-	err := (t.ExecuteTemplate(w, "dog.html", ""))
+	err := (t.ExecuteTemplate(w, "dog.html", person))
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func me(w http.ResponseWriter, req *http.Request) {
-	err := t.ExecuteTemplate(w, "me.html", "")
+	err := t.ExecuteTemplate(w, "me.html", person)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func main() {
+	person = Person{"Anna-Maria", "Gobati", 50}
 	fileserver := http.FileServer(http.Dir("./img"))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/dog", dog)
