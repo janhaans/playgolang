@@ -44,10 +44,11 @@ func me(w http.ResponseWriter, req *http.Request) {
 func main() {
 	person = Person{"Anna-Maria", "Gobati", 50}
 	fileserver := http.FileServer(http.Dir("./img"))
-	http.HandleFunc("/", index)
+	http.Handle("/", http.HandlerFunc(index))
 	http.HandleFunc("/dog", dog)
 	http.HandleFunc("/me", me)
 	http.Handle("/images/", http.StripPrefix("/images", fileserver))
+	http.Handle("/try", http.NotFoundHandler())
 
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
