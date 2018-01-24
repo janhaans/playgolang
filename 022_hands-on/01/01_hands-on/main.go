@@ -23,21 +23,21 @@ var person Person
 func index(w http.ResponseWriter, req *http.Request) {
 	err := t.ExecuteTemplate(w, "index.html", person)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, "FileNotFound", 404)
 	}
 }
 
 func dog(w http.ResponseWriter, req *http.Request) {
 	err := (t.ExecuteTemplate(w, "dog.html", person))
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, "FileNotFound", 404)
 	}
 }
 
 func me(w http.ResponseWriter, req *http.Request) {
 	err := t.ExecuteTemplate(w, "me.html", person)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, "FileNotFound", 404)
 	}
 }
 
@@ -50,8 +50,5 @@ func main() {
 	http.Handle("/images/", http.StripPrefix("/images", fileserver))
 	http.Handle("/try", http.NotFoundHandler())
 
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
