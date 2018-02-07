@@ -31,6 +31,8 @@ func SendMessage(m Messenger) {
 }
 
 func main() {
+	//person can be value of type Person or pointer to type Person (&Person).
+	//In this example person is value of type Person
 	person := Person{
 		name: "Jan Haans",
 	}
