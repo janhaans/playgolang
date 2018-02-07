@@ -17,6 +17,11 @@ func (p *Person) SetName(name string) {
 	p.name = name
 }
 
+type Employee struct {
+	Person
+	role string
+}
+
 type Messenger interface {
 	GetName() string
 }
@@ -35,4 +40,17 @@ func main() {
 	person.SetName("Valentina Haans")
 	fmt.Printf("Hello %s \n", person.GetName())
 	SendMessage(person)
+
+	employee := Employee{
+		Person: Person{
+			name: "AM Gobati",
+		},
+		role: "baas",
+	}
+
+	fmt.Printf("Hello %s \n", employee.GetName())
+	SendMessage(employee)
+	employee.SetName("Dino Gobati")
+	fmt.Printf("Hello %s \n", employee.GetName())
+	SendMessage(employee)
 }
